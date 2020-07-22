@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CoursesListItem = ({ course }) => (
   <div className="card mb-4">
@@ -17,12 +18,12 @@ const CoursesListItem = ({ course }) => (
           </p>
           <h2 className="h5">{course.title}</h2>
           <p>{course.description}</p>
-          <a
-            href={`/course/${course.id}/`}
+          <Link
+            to={`/course/${course.id}/`}
             className="btn btn-outline-primary btn-sm mr-3 mb-2"
           >
             Подробнее
-          </a>
+          </Link>
         </div>
       </div>
     </div>
