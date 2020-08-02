@@ -36,24 +36,24 @@ const Header = (props) => (
           </li>
           {props.userInfo
             ? [
-                <li className="nav-item ">
+                <li className="nav-item" key="register">
                   <Link className="nav-link" to="/ajax-register/">
                     Register
                   </Link>
                 </li>,
-                <li className="nav-item ">
+                <li className="nav-item" key="login">
                   <Link className="nav-link" to="/accounts/login/">
                     Login
                   </Link>
                 </li>,
               ]
             : [
-                <li className="nav-item ">
+                <li className="nav-item" key="profile">
                   <Link className="nav-link" to="/profile">
-                    {props.userInfo.name}
+                    {props.userInfo?.name}
                   </Link>
                 </li>,
-                <li className="nav-item ">
+                <li className="nav-item" key="logout">
                   <a className="nav-link" href="/logout">
                     Logout
                   </a>

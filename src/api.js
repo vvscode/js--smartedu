@@ -17,4 +17,12 @@ export const sendApplication = (applicationDetails) =>
     .then((response) => response.data);
 
 export const getMyInfo = () =>
-  axios.get(`${API_BASE}/users/me`).then((response) => response.data);
+  axios.get(`${API_BASE}/users/me/info`).then((response) => response.data);
+
+export const getUserCourses = () =>
+  axios.get(`${API_BASE}/users/me/courses/`).then((response) => response.data);
+
+export const regenerateToken = (currentToken) =>
+  axios
+    .post(`${API_BASE}/users/me/regenerate-token`, currentToken)
+    .then((response) => response.data);
