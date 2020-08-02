@@ -15,3 +15,6 @@ export const sendApplication = (applicationDetails) =>
   axios
     .post(`${API_BASE}/application`, applicationDetails)
     .then((response) => response.data);
+
+export const getMyInfo = () =>
+  axios.get(`${API_BASE}/users/me`).then((response) => response.data);

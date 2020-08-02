@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { selectUserInfo } from "../rdx/user";
 
-const Header = () => (
+const Header = (props) => (
   <header className="container mt-3">
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
@@ -32,21 +34,37 @@ const Header = () => (
               Contact us
             </Link>
           </li>
-
-          <li className="nav-item ">
-            <Link className="nav-link" to="/ajax-register/">
-              Register
-            </Link>
-          </li>
-          <li className="nav-item ">
-            <Link className="nav-link" to="/accounts/login/">
-              Login
-            </Link>
-          </li>
+          {props.userInfo
+            ? [
+                <li className="nav-item ">
+                  <Link className="nav-link" to="/ajax-register/">
+                    Register
+                  </Link>
+                </li>,
+                <li className="nav-item ">
+                  <Link className="nav-link" to="/accounts/login/">
+                    Login
+                  </Link>
+                </li>,
+              ]
+            : [
+                <li className="nav-item ">
+                  <Link className="nav-link" to="/profile">
+                    {props.userInfo.name}
+                  </Link>
+                </li>,
+                <li className="nav-item ">
+                  <a className="nav-link" href="/logout">
+                    Logout
+                  </a>
+                </li>,
+              ]}
         </ul>
       </div>
     </nav>
   </header>
 );
 
-export default Header;
+export default connect((state) => ({ userInfo: selectUserInfo(state) }))(
+  Header
+);
