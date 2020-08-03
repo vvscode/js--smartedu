@@ -1,10 +1,7 @@
 import React from "react";
 import MainPage from "./Main";
 import * as api from "../api";
-import { render } from "@testing-library/react";
-import { MemoryRouter as Router } from "react-router";
-import { createStore } from "../rdx/createStore";
-import { Provider } from "react-redux";
+import { renderForTest } from "../utils/test-renders";
 
 jest.mock("../api");
 
@@ -18,27 +15,15 @@ const makeCourse = (id) => ({
 });
 
 describe("Main Page", () => {
-  let store;
-  const renderMainPage = () => {
-    store = createStore();
-    render(
-      <Provider store={store}>
-        <Router>
-          <MainPage />
-        </Router>
-      </Provider>
-    );
-  };
-
   it("requests new courses on render", () => {
     api.getCourses.mockResolvedValueOnce([]);
-    renderMainPage();
+    renderForTest(<MainPage />);
     expect(api.getCourses).toHaveBeenCalled();
   });
 
   it("renders loaded courses", async () => {
     api.getCourses.mockResolvedValueOnce([makeCourse(1), makeCourse(2)]);
-    const wrapper = renderMainPage();
+    const { wrapper } = renderForTest(<MainPage />);
     await api.getCourses();
     expect(wrapper).toMatchSnapshot();
   });
