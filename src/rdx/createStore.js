@@ -5,7 +5,8 @@ const reducer = {
   user: userSlice.reducer,
 };
 
-export const createStore = () =>
+export const createStore = (preloadedState) =>
   configureStore({
     reducer,
+    preloadedState,
   });

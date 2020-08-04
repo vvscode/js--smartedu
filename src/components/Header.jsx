@@ -34,7 +34,7 @@ const Header = (props) => (
               Contact us
             </Link>
           </li>
-          {props.userInfo
+          {!props.userInfo
             ? [
                 <li className="nav-item" key="register">
                   <Link className="nav-link" to="/ajax-register/">
